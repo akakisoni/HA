@@ -11,27 +11,27 @@ exit && sudo reboot
 DEBIAN 12
 Pre-installation Steps
 Step 1: Becoming Root
-Before we start, you must make sure you are logged in as root, Debian may not come with sudo installed, so in order to become root type:
-su -
-Then enter the root password you configured during installation, Be sure not to forget the dash as it allows the system to run the login scripts for the root user.
-However, if you are on a system with sudo installed you can use the command:
-sudo su -
+Прежде чем мы начнем, вы должны убедиться, что вы вошли в систему как root, Debian может не иметь установленного sudo, поэтому для того, чтобы стать пользователем root:su -
+Затем введите пароль root, который вы установили во время установки. Не забудьте про тире, поскольку оно позволяет системе запускать сценарии входа для пользователя root.
+Однако, если вы находитесь в системе с установленным sudo, вы можете использовать команду:sudo su -
 Before preceding, confirm you are root by typing:
+
 whoami
+
 You must be root in order to continue
 Step 2: Updating your System
-Before starting it is a good idea to update your system, to do so enter the three following commands:
-
+Перед запуском рекомендуется обновить вашу систему. Для этого введите три следующие команды:
+------------------------------------------------------------------------------------------------------------------
 apt-get update & apt-get upgrade -y
-
+------------------------------------------------------------------------------------------------------------------
 apt-get upgrade -y
 apt-get dist-upgrade -y
-
+------------------------------------------------------------------------------------------------------------------
 Step 3: Install Dependency’s
-Install all the required dependency’s with the following command:
-
+Установите все необходимые зависимости с помощью следующей команды:
+------------------------------------------------------------------------------------------------------------------
 sudo apt-get -y install systemd-resolved
-
+------------------------------------------------------------------------------------------------------------------
 apt install \
 apparmor \
 cifs-utils \
@@ -46,22 +46,27 @@ systemd-journal-remote \
 systemd-resolved \
 udisks2 \
 wget -y
-
+------------------------------------------------------------------------------------------------------------------
 or
+------------------------------------------------------------------------------------------------------------------
 apt-get install \ jq \ wget \ curl \ udisks2 \ libglib2.0-bin \ network-manager \ dbus -y
-
+------------------------------------------------------------------------------------------------------------------
 curl -fsSL get.docker.com | sh
-
+------------------------------------------------------------------------------------------------------------------
 (curl -sL “https://raw.githubusercontent.com/Kanga-Who/home-assistant/master/supervised-installer.sh” | sudo bash -s)
-
+------------------------------------------------------------------------------------------------------------------
 Step 1: Install The Docker Engine
 1. Run the Docker CE installation script
-Simply run the Docker CE for Linux installation script:
+Просто запустите сценарий установки Docker CE для Linux:
+------------------------------------------------------------------------------------------------------------------
 curl -fsSL get.docker.com | sh
+------------------------------------------------------------------------------------------------------------------
 2. Test your Docker Install (Optional)
-To test your docker install run the hello-world script:
+Чтобы проверить установку докера, запустите сценарий hello-world:
+------------------------------------------------------------------------------------------------------------------
 docker run hello-world
-If Docker is working correctly the following message will be displayed:
+------------------------------------------------------------------------------------------------------------------
+Если Docker работает правильно, появится следующее сообщение:
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
@@ -81,18 +86,31 @@ Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
+
 Step 2: Install Home Assistant
 Installing Home Assistant is easy simply follow these steps
-1. Install the OS Agent
-The OS Agent allows the Home Assistant Supervisor to communicate with D-Bus and will soon be required
-To Install it simply use the follow commands:
-wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_x86_64.deb
-apt install ./os-agent_1.6.0_linux_x86_64.deb
-Of course being sure you replace `os-agent_1.4.0_linux_x86_64.deb` with the latest version which matches your CPU architecture. Available at the GitHub Releases page
-2. Run the Home Assistant Install Script
-Now that you are root simply run these commands to download and install Home Assistant Supervised:
-wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
-apt install ./homeassistant-supervised.deb
-After it has finished running you should be able to access Home Assistant from:
-http://your.ip.address.here:8123
 
+1. Install the OS Agent
+OS Agent позволяет Home Assistant Supervisor связываться с D-Bus и скоро потребуется.
+Чтобы установить его, просто используйте следующие команды:
+------------------------------------------------------------------------------------------------------------------
+wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_x86_64.deb
+
+sudo apt install ./os-agent_1.6.0_linux_x86_64.deb
+------------------------------------------------------------------------------------------------------------------
+Of course being sure you replace `os-agent_1.6.0_linux_x86_64.deb` with the latest version which matches your CPU architecture. Available at the
+
+https://github.com/home-assistant/os-agent/releases/tag/1.6.0
+
+2. Run the Home Assistant Install Script
+Теперь, когда вы являетесь пользователем root, просто запустите эти команды, чтобы загрузить и установить Home Assistant Supervised.:
+------------------------------------------------------------------------------------------------------------------
+wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+
+sudo apt install ./homeassistant-supervised.deb
+------------------------------------------------------------------------------------------------------------------
+После завершения работы вы сможете получить доступ к Home Assistant:
+
+------------------------------------------------------------------------------------------------------------------
+http://your_ip_address_here:8123
+------------------------------------------------------------------------------------------------------------------
